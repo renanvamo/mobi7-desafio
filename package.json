@@ -1,0 +1,25 @@
+{
+  "name": "mobi7-desafio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "node ./src/database/createCollections.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renanvamo/mobi7-desafio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/renanvamo/mobi7-desafio/issues"
+  },
+  "homepage": "https://github.com/renanvamo/mobi7-desafio#readme",
+  "dependencies": {
+    "csvtojson": "^2.0.10",
+    "mongodb": "^4.3.1"
+  }
+}
