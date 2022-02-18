@@ -5,8 +5,12 @@ const getLogByDate = async (placa) => {
   const positions = await locationModel.getPositionsByPlate(placa);
   const pois = await locationModel.getPois();
 
-  //necessário implementar a lógica para verificar se as coordenadas de posicao, estao dentro do raio de pois
-  // const result = 'O veículo TESTE001 estava no dia 19/12/18 às 15h07m19s a 10 km/h na posição (51.549662,-25.5244493) com ignição ligada.';
+  const log = checkPositionsAndPois(positions, pois, placa);
+
+  return { [placa]: log };
+}
+
+const checkPositionsAndPois = (positions, pois, placa) => {
   const result = [];
   for (let i = 0; i < pois.length; i += 1) {
     for (let j = 0; j < positions.length; j += 1) {
@@ -21,13 +25,12 @@ const getLogByDate = async (placa) => {
 
         const log = `O veículo ${placa} estava no dia ${data} às ${hour} à ${velocidade} km/h na posição (${poiLat} ${poiLong}) com ignição ${ignicao}`;
         
-        await result.push(log)
+        result.push(log);
       }
     }
   }
-
-  return { [placa]: result };
-}
+  return result
+};
 
 const formatDate = (datetime) => {
   const date = new Date(datetime)
