@@ -9,14 +9,6 @@ const getPositionsByPlate = async (placa) => {
   return positions;
 };
 
-const getPositionsByPlateAndDate = async (placa, date) => {
-  const collection = await getDocuments('positions');
-  const positions = await collection.find({ placa, data_posicao: date }).toArray();
-
-  console.log(positions.length);
-  return positions;
-};
-
 const getPois = async () => {
   const collection = await getDocuments('pois');
   const pois = await collection.find().toArray();
@@ -25,7 +17,6 @@ const getPois = async () => {
 }
 
 module.exports = {
-  getPositionsByPlateAndDate,
   getPositionsByPlate,
   getPois
 };
