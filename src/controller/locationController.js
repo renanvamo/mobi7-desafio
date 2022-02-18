@@ -1,11 +1,12 @@
 const locationService = require('../services/locationService.js');
 
-const getLog = (_req, res) => {
-  const result = locationService.getLog();
+const getLogByDate = async (req, res) => {
+  const { placa } = req.query;
+  const result = await locationService.getLogByDate();
 
   res.status(200).json(result);
 };
 
 module.exports = {
-  getLog
+  getLogByDate
 };

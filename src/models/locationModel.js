@@ -9,7 +9,7 @@ const getPositions = async () => {
 
 const getPois = async () => {
   const pois = await getDocuments('pois');
-  return pois
+  return pois;
 }
 
 module.exports = {

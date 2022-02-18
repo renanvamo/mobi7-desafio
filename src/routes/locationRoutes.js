@@ -1,7 +1,7 @@
 const locationRoute = require('express').Router();
 
-const { getLog } = require('../controller/locationController');
+const { getLogByDate } = require('../controller/locationController');
 
-locationRoute.get('/location', getLog);
+locationRoute.get('/location', getLogByDate);
 
 module.exports = locationRoute;
