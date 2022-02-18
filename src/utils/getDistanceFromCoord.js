@@ -11,7 +11,7 @@ function getDistanceFromCoord(lat1, lon1, lat2, lon2, rad) {
     ; 
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));  
   var d = R * c; // calcula distancia em metros
-  console.log('Distancia em metros: ', d);
+  // console.log('Distancia em metros: ', d);
   
   return isWithinRadius(rad, d);
 }
