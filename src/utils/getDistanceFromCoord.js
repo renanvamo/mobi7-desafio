@@ -26,14 +26,14 @@ function deg2rad(deg) {
 }
 
 // teste manual
-const latitudeY = -23.67338275750472;
-const longitudeX = -46.78648726159119;
-const latitude = -23.674360451874854;
-const longitude = -46.78777596898742;
-const raio1 = 100;
-const raio2 = 200;
-console.log('Está dentro de um raio de 100m: ', getDistanceFromCoord(latitude, longitude, latitudeY, longitudeX, raio1))
-console.log('Está dentro de um raio de 200m: ', getDistanceFromCoord(latitude, longitude, latitudeY, longitudeX, raio2))
+// const latitudeY = -23.67338275750472;
+// const longitudeX = -46.78648726159119;
+// const latitude = -23.674360451874854;
+// const longitude = -46.78777596898742;
+// const raio1 = 100;
+// const raio2 = 200;
+// console.log('Está dentro de um raio de 100m: ', getDistanceFromCoord(latitude, longitude, latitudeY, longitudeX, raio1))
+// console.log('Está dentro de um raio de 200m: ', getDistanceFromCoord(latitude, longitude, latitudeY, longitudeX, raio2))
 //
 
 module.exports = getDistanceFromCoord;
