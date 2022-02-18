@@ -2,8 +2,8 @@ const locationModel = require('../models/locationModel');
 const getDistanceFromCoord = require('../utils/getDistanceFromCoord');
 
 
-const getLogByDate = async () => {
-  const positions = await locationModel.getPositions();
+const getLogByDate = async (placa) => {
+  const positions = await locationModel.getPositionsByPlate(placa);
   const pois = await locationModel.getPois();
 
   //necessário implementar a lógica para verificar se as coordenadas de posicao, estao dentro do radio de pois
