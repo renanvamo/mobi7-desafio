@@ -12,8 +12,8 @@ const checkPositionsAndPois = (positions, pois, placa) => {
         const data = formatDate(fullData);
         const hour = formatHour(fullData);
         const velocidade = position.velocidade;
-        const poiLat = position.latitude;
-        const poiLong = position.longitude;
+        const poiLat = poi.latitude;
+        const poiLong = poi.longitude;
 
         const log = `O veículo ${placa} estava no dia ${data} às ${hour} à ${velocidade} km/h na posição (${poiLat} ${poiLong}) com ignição ${ignicao}`;
         
