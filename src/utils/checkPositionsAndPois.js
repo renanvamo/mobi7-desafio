@@ -3,25 +3,26 @@ const formatDate = require('./formatDate');
 const formatHour = require('./formatHour');
 
 const checkPositionsAndPois = (positions, pois, placa) => {
-  const result = [];
-  for (let i = 0; i < pois.length; i += 1) {
-    for (let j = 0; j < positions.length; j += 1) {
-      if (getDistanceFromCoord(positions[j].latitude, positions[j].longitude, pois[i].latitude, pois[i].longitude, pois[i].raio)) {
-        const ignicao = positions[j].ignicao == 'true' ? 'ligada' : 'desligada';
-        const fullData = positions[j].data_posicao;
+  const filteredPositions = [];
+  pois.map((poi) => (
+    positions.map((position) => {
+      if (getDistanceFromCoord(position.latitude, position.longitude, poi.latitude, poi.longitude, poi.raio)) {
+        const ignicao = position.ignicao == 'true' ? 'ligada' : 'desligada';
+        const fullData = position.data_posicao;
         const data = formatDate(fullData);
         const hour = formatHour(fullData);
-        const velocidade = positions[j].velocidade;
-        const poiLat = positions[i].latitude;
-        const poiLong = positions[j].longitude;
+        const velocidade = position.velocidade;
+        const poiLat = position.latitude;
+        const poiLong = position.longitude;
 
         const log = `O veículo ${placa} estava no dia ${data} às ${hour} à ${velocidade} km/h na posição (${poiLat} ${poiLong}) com ignição ${ignicao}`;
         
-        result.push(log);
+        filteredPositions.push(log);
       }
-    }
-  }
-  return result;
+    })
+  ));
+
+  return filteredPositions;
 };
 
 module.exports = checkPositionsAndPois;
