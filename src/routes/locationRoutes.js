@@ -1,7 +1,8 @@
 const locationRoute = require('express').Router();
 
-const { getLogByDate } = require('../controller/locationController');
+const { getLogsByPlateAndDate, getLogsByPlate } = require('../controller/locationController');
 
-locationRoute.get('/location', getLogByDate);
+locationRoute.get('/location', getLogsByPlate);
+locationRoute.get('/location/:date', getLogsByPlateAndDate);
 
 module.exports = locationRoute;
