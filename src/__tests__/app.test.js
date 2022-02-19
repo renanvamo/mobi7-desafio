@@ -9,7 +9,7 @@ describe('testa a rota \'/location\'', () => {
   const placaIncorreta1 = 'ABC';
   const placaIncorreta2 = 'ABC123456789';
   const dataValida = '18-12-2018';
-  const dataInalida = '2018-12-30';
+  const dataInvalida = '2018-12-30';
 
   before(() => {
     chai.use(chaiHttp);
@@ -85,7 +85,7 @@ describe('testa a rota \'/location\'', () => {
     it(`deve retornar status code \'200\', e ter uma chave igual a placa - \'${placaCorreta}\', e seu valor um array`, (done) => {
       connection
         .get(`/location/${dataValida}`)
-        .query({ placa: placaCorreta, data: dataValida })
+        .query({ placa: placaCorreta })
         .end((_err, res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.have.property(placaCorreta);
@@ -104,5 +104,29 @@ describe('testa a rota \'/location\'', () => {
         });
     });
 
+    it(`o primeiro elemento da chave ${placaCorreta}, deve ser \'O veículo TESTE001 estava no dia 18/12/2018 às 00:18:25 à 0 km/h na posição (-25.363333 -51.468333) com ignição desligada\'`, (done) => {
+      connection
+        .get(`/location/${dataValida}`)
+        .query({ placa: placaCorreta})
+        .end((_err, res) => {
+          expect(res.body[placaCorreta][0]).to.equal('O veículo TESTE001 estava no dia 18/12/2018 às 00:18:25 à 0 km/h na posição (-25.363333 -51.468333) com ignição desligada');
+          done();
+        });
+    });
+  });
+
+  describe(`pesquisando por uma placa válida ${placaCorreta} e pela data inválida ${dataInvalida}`, () => {
+    it(`deve retornar status code \'400\', e ter uma chave \'erro\', e informar que o formato \'data\' é inválido`, (done) => {
+      connection
+        .get(`/location/${dataInvalida}`)
+        .query({ placa: placaCorreta })
+        .end((_err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body).to.have.property('erro');
+          expect(res.body.erro).to.be.a('string');
+          expect(res.body.erro).to.equal('"date" must be in DD-MM-YYYY format');
+          done();
+        });
+    });
   });
 });
