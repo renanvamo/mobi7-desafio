@@ -1,4 +1,4 @@
-# mobi7-desafio
+# Mobi7-desafio
 
 Bem vindos! Este repositório foi criado com o intuito de resolver o desafio proposto pela Mobi7.
 
@@ -49,7 +49,6 @@ git clone git@github.com:renanvamo/Mobi7-desafio.
 2. Entre na pasta do repositório que você acabou de clonar:
 ```
 cd Mobi7-desafio
-
 ```
 
 3. Instale as dependências do projeto executando no terminal:
