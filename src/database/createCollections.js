@@ -9,7 +9,7 @@ const createCollections = async () => {
 
   await connection().then((db) => db.collection('positions').insertMany(positions));
   await connection().then((db) => db.collection('pois').insertMany(pois));
-  console.log('O banco de dados \'Mobi7\', com as collections \'positions\' e \'pois\' foram criados');
+  console.log('O banco de dados \'Mobi7\', com as collections \'positions\' e \'pois\', foi criado');
   process.exit();
 };
 
