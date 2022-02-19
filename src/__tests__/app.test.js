@@ -80,4 +80,29 @@ describe('testa a rota \'/location\'', () => {
         });
     });
   });
+
+  describe(`pesquisando por uma placa válida ${placaCorreta} e pela data válida ${dataValida}`, () => {
+    it(`deve retornar status code \'200\', e ter uma chave igual a placa - \'${placaCorreta}\', e seu valor um array`, (done) => {
+      connection
+        .get(`/location/${dataValida}`)
+        .query({ placa: placaCorreta, data: dataValida })
+        .end((_err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.have.property(placaCorreta);
+          expect(res.body[placaCorreta]).to.be.an('array');
+          done();
+        });
+    });
+
+    it(`deve retornar \'61\' documentos'`, (done) => {
+      connection
+        .get(`/location/${dataValida}`)
+        .query({ placa: placaCorreta })
+        .end((_err, res) => {
+          expect(res.body[placaCorreta]).to.have.length(61);
+          done();
+        });
+    });
+
+  });
 });
