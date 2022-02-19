@@ -34,6 +34,9 @@ O Banco de dados utilizado neste projeto foi o MongoDB.
 
 Ele foi escolhido pela não necessidade de relacionamentos entre tabelas, possuir melhor performance e por não poder eventualmente ter a consistência de informações.
 
+Os arquivos que contém os datos que serão inseridos no banco de dados, estão dentro da pasta `database`, e têm o nome de:
+`base_pois_def.csv` e `posicoes.csv`.
+
 ## Executando a aplicação localmente
 
 Antes de mais nada, é importante atentar-se que para rodar a aplicação, será necessário possuir o MongoDB instalado em sua máquina.
@@ -73,6 +76,18 @@ para desenvolvimento
 ```
 npm run dev
 ```
+
+## Validações
+
+As validações feitas no projeto são referetes aos campos `data` e `placa` que são enviados através da URL.
+
+Todas as validações foram realizadas através da bliblioteca `Joi`.
+
+Sobre o campo data, ele deve ter o formato "DD-MM-AAAA", se você tentar separar os campos por outro caractere que não seja "-", a aplicação retornará um erro de formato da data, e se tentar colocar em outra ordem, por exemplo "AAAA-MM-DD", o erro será o mesmo.
+
+Para o campo de placa, é possível enviar uma placa que contenha 7 ou 8 caracteres e ele é obrigatório, se for enviado em outro formato, ou não enviar, também haverá um erro.
+
+
 
 ## Testes Manuais
 
