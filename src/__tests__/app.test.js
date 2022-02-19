@@ -8,6 +8,8 @@ describe('testa a rota \'/location\'', () => {
   const placaCorreta = 'TESTE001';
   const placaIncorreta1 = 'ABC';
   const placaIncorreta2 = 'ABC123456789';
+  const dataValida = '18-12-2018';
+  const dataInalida = '2018-12-30';
 
   before(() => {
     chai.use(chaiHttp);
@@ -15,12 +17,12 @@ describe('testa a rota \'/location\'', () => {
 
   beforeEach(() => {
     connection = chai.request(app)
-      .get('/location')
   });
 
   describe(`pesquisando pela placa \'${placaCorreta}\'`, () => {  
     it(`deve retornar status code \'200\', e ter uma chave igual a placa - \'${placaCorreta}\', e seu valor um array`, (done) => {
       connection
+        .get('/location')
         .query({ placa: placaCorreta})
         .end((_err, res) => {
           expect(res).to.have.status(200);
@@ -32,6 +34,7 @@ describe('testa a rota \'/location\'', () => {
 
     it(`deve retornar \'564\' documentos'`, (done) => {
       connection
+        .get('/location')
         .query({ placa: placaCorreta})
         .end((_err, res) => {
           expect(res.body[placaCorreta]).to.have.length(564);
@@ -41,6 +44,7 @@ describe('testa a rota \'/location\'', () => {
 
     it(`o primeiro elemento da chave ${placaCorreta}, deve ser \'O veículo TESTE001 estava no dia 19/12/2018 às 15:22:01 à 28 km/h na posição (-25.56742701740896 -51.47653363645077) com ignição ligada\'`, (done) => {
       connection
+        .get('/location')
         .query({ placa: placaCorreta})
         .end((_err, res) => {
           expect(res.body[placaCorreta][0]).to.equal('O veículo TESTE001 estava no dia 19/12/2018 às 15:22:01 à 28 km/h na posição (-25.56742701740896 -51.47653363645077) com ignição ligada');
@@ -49,15 +53,29 @@ describe('testa a rota \'/location\'', () => {
     });
   });
 
-  describe(`pesquisando por uma placa incorreta \'${placaIncorreta1}\'`, () => {
-    it(`deve retornar status code \'400\', e ter uma chave \'erro\', `, (done) => {
+  describe(`pesquisando por uma placa incorreta`, () => {
+    it(`\'${placaIncorreta1}\' deve retornar status code \'400\', e ter uma chave \'erro\', e informar o usuário que são mínimo 7 caracteres`, (done) => {
       connection
+        .get('/location')
         .query({ placa: placaIncorreta1})
         .end((_err, res) => {
           expect(res).to.have.status(400);
           expect(res.body).to.have.property('erro');
           expect(res.body.erro).to.be.a('string');
           expect(res.body.erro).to.equal('"placa" deve ter no mínimo 7 caracteres');
+          done();
+        });
+    });
+
+    it(`\'${placaIncorreta2}\' deve retornar status code \'400\', e ter uma chave \'erro\', e informar o usuário que são no máximo 8 caracteres`, (done) => {
+      connection
+        .get('/location')
+        .query({ placa: placaIncorreta2})
+        .end((_err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body).to.have.property('erro');
+          expect(res.body.erro).to.be.a('string');
+          expect(res.body.erro).to.equal('"placa" deve ter no máximo 8 caracteres');
           done();
         });
     });
