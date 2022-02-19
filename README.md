@@ -87,7 +87,19 @@ Sobre o campo data, ele deve ter o formato "DD-MM-AAAA", se você tentar separar
 
 Para o campo de placa, é possível enviar uma placa que contenha 7 ou 8 caracteres e ele é obrigatório, se for enviado em outro formato, ou não enviar, também haverá um erro.
 
+## Testes automatizados
 
+Os testes dessa aplicação foram realizados através das bibliotcas chai, chai-http e mocha.
+
+Para essa aplicação, o banco de dados utilizado para testes foi o banco de dados "real", ele não foi mockado pois não são feitas operações de CRUD.
+
+Para rodar os testes, após instalar as dependências do projeto nos passos acima, você pode rodar o script de testes com o seguinte comando:
+
+```
+npm run test
+```
+
+Após isso, os testes serão rodados e o log dos testes será mostrado no terminal.
 
 ## Testes Manuais
 
